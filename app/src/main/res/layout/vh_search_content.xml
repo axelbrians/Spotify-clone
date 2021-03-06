@@ -22,10 +22,12 @@
 
     <ImageView
         android:id="@+id/vh_search_content_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:src="@drawable/search_content_1"
-        android:rotation="20"
+        android:rotation="25"
+        android:translationX="20dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

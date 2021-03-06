@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="12dp"
     android:paddingVertical="10dp"
-    tools:background="@color/black_background">
+    android:background="@color/black_background">
 
     <LinearLayout
         android:id="@+id/vh_search_bar_linear_layout"

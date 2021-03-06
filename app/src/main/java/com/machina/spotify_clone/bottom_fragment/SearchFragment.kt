@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
 import com.machina.spotify_clone.databinding.FragmentSearchBinding
+import com.machina.spotify_clone.recycler.decoration.StickyHeaderItemDecoration
 import com.machina.spotify_clone.recycler.search.SearchAdapter
 
 class SearchFragment : Fragment() {
@@ -21,10 +22,14 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        val mAdapter = SearchAdapter()
         val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        val mStickyHeader = StickyHeaderItemDecoration(mAdapter)
+
         binding.fragmentSearchRecycler.apply {
+            adapter = mAdapter
             layoutManager = mLayoutManager
-            adapter = SearchAdapter()
+            addItemDecoration(mStickyHeader)
         }
 
         return binding.root
