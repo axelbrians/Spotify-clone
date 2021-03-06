@@ -25,7 +25,6 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        val mItemDecoration = EqualSpacingItemDecoration(24, RecyclerView.HORIZONTAL)
         binding.fragmentHomeRecyclerView.apply {
             layoutManager = mLayoutManager
             adapter = HomeParentAdapter()

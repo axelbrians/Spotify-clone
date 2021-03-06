@@ -3,31 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vh_search_content_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="8dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="8dp"
-    tools:background="@color/black">
+    android:layout_height="100dp"
+    tools:background="@drawable/bg_content_green_gradient">
 
     <TextView
-        android:id="@+id/vh_home_greeting"
-        android:layout_width="0dp"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Good afternoon"
-        android:textSize="22sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:text="Pop"
+        android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/vh_home_first_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_outline_settings_24"
-        app:tint="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/vh_search_content_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/search_content_1"
+        android:rotation="20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

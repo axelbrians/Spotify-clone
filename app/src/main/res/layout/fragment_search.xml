@@ -6,10 +6,10 @@
     android:background="@color/black_background"
     tools:context=".bottom_fragment.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_search_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="search page" />
+        android:orientation="vertical"/>
 
 </FrameLayout>
