@@ -1,16 +1,45 @@
 package com.machina.spotify_clone.recycler.decoration
 
 import android.graphics.Canvas
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.machina.spotify_clone.recycler.listener.OnSearchBarClickListener
 
 
-class StickyHeaderItemDecoration(private val mListener: StickyHeaderInterface):
-        RecyclerView.ItemDecoration() {
+class StickyHeaderItemDecoration(
+        private val mListener: StickyHeaderInterface,
+        private val onSearchBarClickListener: OnSearchBarClickListener,
+        recyclerView: RecyclerView)
+    : RecyclerView.ItemDecoration() {
 
-    private var mStickyHeaderHeight = 0
+    var mStickyHeaderHeight = 0
+
+    init {
+        recyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                return if (e.y <= mStickyHeaderHeight && rv.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // implement clickListener on header here
+                    onSearchBarClickListener.onSearchBarClick()
+                    Log.d(TAG, "Sticky header clicked")
+                    true
+                } else {
+                    false
+                }
+            }
+
+            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+
+            }
+
+            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+
+            }
+        })
+    }
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
@@ -97,7 +126,12 @@ class StickyHeaderItemDecoration(private val mListener: StickyHeaderInterface):
         // Specs for children (headers)
         val childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec, parent.paddingLeft + parent.paddingRight, view.layoutParams.width)
         val childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec, parent.paddingTop + parent.paddingBottom, view.layoutParams.height)
+        mStickyHeaderHeight = childHeightSpec
         view.measure(childWidthSpec, childHeightSpec)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight.also { mStickyHeaderHeight = it })
+    }
+
+    companion object {
+        private const val TAG = "StickyHeaderItemDecoration"
     }
 }

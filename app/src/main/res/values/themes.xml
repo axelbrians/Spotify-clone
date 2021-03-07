@@ -26,7 +26,12 @@
     </style>
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="textAppearanceCaption">@style/BottomNavTextAppearance</item>
         <item name="colorPrimary">@color/grey_background</item>
         <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="BottomNavTextAppearance">
+        <item name="android:textSize">11sp</item>
     </style>
 </resources>

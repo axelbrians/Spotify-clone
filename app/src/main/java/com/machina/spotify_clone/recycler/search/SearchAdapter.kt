@@ -3,17 +3,22 @@ package com.machina.spotify_clone.recycler.search
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
+import com.machina.spotify_clone.databinding.VhSearchBarBinding
+import com.machina.spotify_clone.databinding.RecyclerParentSearchContentBinding
+import com.machina.spotify_clone.databinding.VhSearchGreetingBinding
+import com.machina.spotify_clone.databinding.VhSearchHeaderBinding
 import com.machina.spotify_clone.recycler.decoration.EqualSpacingItemDecoration
 import com.machina.spotify_clone.recycler.decoration.StickyHeaderInterface
-import com.machina.spotify_clone.recycler.decoration.StickyHeaderItemDecoration
+import com.machina.spotify_clone.recycler.listener.OnSearchBarClickListener
 import kotlin.random.Random
 
-class SearchAdapter:
+class SearchAdapter(
+        private val onSearchBarClickListener: OnSearchBarClickListener
+):
         RecyclerView.Adapter<BaseSearchVH>(),
         StickyHeaderInterface {
 
@@ -22,35 +27,40 @@ class SearchAdapter:
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseSearchVH {
+        val layoutInflater = LayoutInflater.from(parent.context)
         when (viewType) {
             0 -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(R.layout.vh_search_greeting, parent, false)
+                val binding = VhSearchGreetingBinding.inflate(
+                        layoutInflater,
+                        parent,
+                        false)
 
-                return SearchHeaderVH(view)
+                return SearchHeaderVH(binding)
             }
             1 -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(R.layout.vh_search_bar, parent, false)
+                val binding = VhSearchBarBinding.inflate(
+                        layoutInflater,
+                        parent ,
+                        false)
 
-                return SearchBarVH(view)
+                return SearchBarVH(binding, onSearchBarClickListener)
             }
             2 -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(R.layout.vh_search_header, parent, false)
+                val binding = VhSearchHeaderBinding.inflate(
+                        layoutInflater,
+                        parent,
+                        false)
 
-                return SearchContentHeader(view)
+                return SearchContentHeader(binding)
             }
             else -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(R.layout.recycler_parent_search_content, parent, false)
+                val binding = RecyclerParentSearchContentBinding.inflate(
+                        layoutInflater,
+                        parent,
+                        false)
                 val itemDecoration = EqualSpacingItemDecoration(40)
 
-                return SearchRecyclerVH(view, itemDecoration)
+                return SearchRecyclerVH(binding, itemDecoration)
             }
         }
     }
@@ -61,7 +71,7 @@ class SearchAdapter:
                 if (position == 3) {
                     val adapter = SearchContentAdapter(4)
                     val childLayoutManager = GridLayoutManager(
-                        holder.recyclerView.context,
+                        holder.binding.recyclerParentSearchRecycler.context,
                         2,
                         RecyclerView.VERTICAL,
                         false
@@ -69,16 +79,19 @@ class SearchAdapter:
                     holder.onBind(adapter, childLayoutManager)
                 }
                 if (position > 3) {
-                    val adapter = SearchContentAdapter(Random.nextInt(7, 16))
+                    val adapter = SearchContentAdapter(Random.nextInt(17, 29))
 
                     val childLayoutManager = GridLayoutManager(
-                        holder.recyclerView.context,
-                        2,
+                        holder.binding.recyclerParentSearchRecycler.context,
+                    2,
                         RecyclerView.VERTICAL,
                         false
                     )
                     holder.onBind(adapter, childLayoutManager)
                 }
+            }
+            is SearchBarVH -> {
+                holder.onBind()
             }
         }
     }
@@ -117,23 +130,40 @@ class SearchAdapter:
     }
 }
 
-class SearchHeaderVH(view: View): BaseSearchVH(view)
+class SearchHeaderVH(binding: VhSearchGreetingBinding): BaseSearchVH(binding.root)
 
-class SearchBarVH(view: View): BaseSearchVH(view)
 
-class SearchContentHeader(view: View): BaseSearchVH(view)
 
-class SearchRecyclerVH(view: View, itemDecoration: EqualSpacingItemDecoration): BaseSearchVH(view) {
-    val recyclerView: RecyclerView = view.findViewById(R.id.recycler_parent_search_recycler)
+class SearchBarVH(
+        private val binding: VhSearchBarBinding,
+        private val onSearchBarClickListener: OnSearchBarClickListener)
+    : BaseSearchVH(binding.root) {
+
+    fun onBind() {
+        binding.vhSearchBarLinearLayout.setOnClickListener {
+            onSearchBarClickListener.onSearchBarClick()
+        }
+    }
+
+}
+
+
+class SearchContentHeader(binding: VhSearchHeaderBinding): BaseSearchVH(binding.root)
+
+
+
+class SearchRecyclerVH(val binding: RecyclerParentSearchContentBinding,
+                       itemDecoration: EqualSpacingItemDecoration)
+    : BaseSearchVH(binding.root) {
 
     init {
-        recyclerView.addItemDecoration(itemDecoration)
+        binding.recyclerParentSearchRecycler.addItemDecoration(itemDecoration)
     }
 
     fun onBind(
         mAdapter: SearchContentAdapter,
         mLayoutManager: LinearLayoutManager) {
-        recyclerView.apply {
+        binding.recyclerParentSearchRecycler.apply {
             adapter = mAdapter
             layoutManager = mLayoutManager
         }
