@@ -19,6 +19,9 @@
 
         <!-- Bottom nav style -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+
+        <!-- Tab layout style -->
+        <item name="tabStyle">@style/Widget.App.TabLayout</item>
     </style>
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
@@ -26,7 +29,29 @@
     </style>
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="textAppearanceCaption">@style/BottomNavTextAppearance</item>
         <item name="colorPrimary">@color/grey_background</item>
         <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="BottomNavTextAppearance">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+
+    <style name="Widget.App.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TabLayout</item>
+        <item name="tabTextAppearance">@style/TabLayoutTextAppearance</item>
+    </style>
+
+    <style name="TabLayoutTextAppearance">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TabLayout" parent="">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
     </style>
 </resources>

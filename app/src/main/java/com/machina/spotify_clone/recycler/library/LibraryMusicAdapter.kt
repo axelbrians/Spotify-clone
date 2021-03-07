@@ -3,12 +3,16 @@ package com.machina.spotify_clone.recycler.library
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
 import com.machina.spotify_clone.databinding.VhLibraryArtistBinding
 import com.machina.spotify_clone.databinding.VhLibraryBarBinding
 import com.machina.spotify_clone.databinding.VhLibraryPlaylistBinding
 import com.machina.spotify_clone.pager.LibraryMusicPagerFragment
+import org.w3c.dom.Text
 import kotlin.random.Random
 
 class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<BaseLibraryVH>() {
@@ -95,19 +99,19 @@ class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<B
 
     private fun playlistOnBind(holder: BaseLibraryVH, position: Int) {
         when (holder) {
-            is LibraryPlaylistVH -> { holder.onBind(downloaded[position]) }
+            is LibraryPlaylistVH -> { holder.onBind(downloaded[position], position) }
         }
     }
 
     private fun artistOnBind(holder: BaseLibraryVH, position: Int) {
         when (holder) {
-            is LibraryArtistVH -> { holder.onBind(artistList[position]) }
+            is LibraryArtistVH -> { holder.onBind(artistList[position], position, count) }
         }
     }
 
     private fun albumOnBind(holder: BaseLibraryVH, position: Int) {
         when (holder) {
-            is LibraryPlaylistVH -> { holder.onBind(artistList[position]) }
+            is LibraryPlaylistVH -> { holder.onBind(artistList[position], position) }
         }
     }
 
@@ -138,19 +142,53 @@ class LibraryPlaylistVH(
         private val viewType: Int)
     : BaseLibraryVH(binding.root) {
 
-    fun onBind(data: Any) {
-        if (viewType == LibraryMusicAdapter.PLAYLIST) playlistBind(data as Boolean)
+    private val playlistImg: ImageView = binding.vhLibraryPlaylistImg
+    private val playlistIcon: ImageView = binding.vhLibraryPlaylistPlus
+    private val btmContainer: LinearLayout = binding.vhLibraryPlaylistBtmContainer
+    private val artistName: TextView = binding.vhLibraryPlaylistArtist
+
+    fun onBind(data: Any, position: Int) {
+        if (viewType == LibraryMusicAdapter.PLAYLIST) playlistBind(data as Boolean, position)
         else albumBind(data as String)
     }
 
-    private fun playlistBind(downloaded: Boolean) {
+    private fun playlistBind(downloaded: Boolean, position: Int) {
         if (!downloaded) binding.vhLibraryPlaylistDownloaded.visibility = View.GONE
         else binding.vhLibraryPlaylistDownloaded.visibility = View.VISIBLE
+
+        when (position) {
+            1 -> {
+                playlistIcon.apply {
+                    setImageResource(R.drawable.ic_baseline_add_24)
+                    layoutParams.apply { height = 88; width = 88 }
+                    visibility = View.VISIBLE
+                    requestLayout()
+                }
+                playlistImg.setImageResource(R.color.grey_background)
+                btmContainer.visibility = View.GONE
+            }
+            2 -> {
+                playlistIcon.apply {
+                    setImageResource(R.drawable.ic_heart_filled)
+                    layoutParams.apply { height = 48; width = 48 }
+                    visibility = View.VISIBLE
+                    requestLayout()
+                }
+                playlistImg.setImageResource(R.drawable.bg_playlist_liked)
+                artistName.text = "97 songs"
+            }
+            else -> {
+                playlistImg.setImageResource(R.drawable.album_cover_bbibbi)
+                playlistIcon.visibility = View.INVISIBLE
+                btmContainer.visibility = View.VISIBLE
+                artistName.text = "by Axel"
+            }
+        }
     }
 
-    private fun albumBind(artistName: String) {
+    private fun albumBind(artist: String) {
         binding.vhLibraryPlaylistTitle.text = "Album name"
-        binding.vhLibraryPlaylistArtist.text = artistName
+        binding.vhLibraryPlaylistArtist.text = artist
         binding.vhLibraryPlaylistDownloaded.visibility = View.GONE
     }
 }
@@ -159,11 +197,18 @@ class LibraryPlaylistVH(
 class LibraryArtistVH(private val binding: VhLibraryArtistBinding)
     : BaseLibraryVH(binding.root) {
 
-    fun onBind(artistName: String) {
+    fun onBind(artistName: String, position: Int, count: Int) {
         binding.vhLibraryArtistName.text = artistName
+        binding.vhLibraryArtistPlus.visibility = View.INVISIBLE
         when (artistName) {
             "YEJI" -> { binding.vhLibraryArtistImg.setImageResource(R.drawable.yeji_suit) }
             "IU" -> { binding.vhLibraryArtistImg.setImageResource(R.drawable.iu_palette) }
+            "TAEYEON" -> { binding.vhLibraryArtistImg.setImageResource(R.drawable.taeyeon_dp)}
+        }
+        if (position == count - 1) {
+            binding.vhLibraryArtistImg.setImageResource(R.color.grey_background)
+            binding.vhLibraryArtistPlus.visibility = View.VISIBLE
+            binding.vhLibraryArtistName.text = "Add artists"
         }
     }
 }

@@ -12,10 +12,22 @@
         android:id="@+id/vh_library_artist_img"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:src="@drawable/taeyeon_dp"
+        android:src="@color/grey_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/vh_library_artist_plus"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:visibility="invisible"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/vh_library_artist_img"
+        app:layout_constraintEnd_toEndOf="@+id/vh_library_artist_img"
+        app:layout_constraintStart_toStartOf="@+id/vh_library_artist_img"
+        app:layout_constraintTop_toTopOf="@+id/vh_library_artist_img" />
 
     <TextView
         android:id="@+id/vh_library_artist_name"
