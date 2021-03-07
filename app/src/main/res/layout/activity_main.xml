@@ -41,8 +41,8 @@
 
         <ImageView
             android:id="@+id/track_song_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:src="@drawable/taeyeon_playlist"
             app:layout_constraintBottom_toTopOf="@id/activity_main_btm_nav"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,15 +61,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Playlist"
-                android:textSize="11sp" />
+                android:text="Song title"
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TAEYEON"
                 android:textColor="@color/grey_deactivated"
-                android:textSize="10sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
         <ImageView

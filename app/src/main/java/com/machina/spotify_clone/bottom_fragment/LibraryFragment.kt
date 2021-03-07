@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.machina.spotify_clone.R
+import com.google.android.material.tabs.TabLayoutMediator
 import com.machina.spotify_clone.databinding.FragmentLibraryBinding
+import com.machina.spotify_clone.pager.LibraryMusicPagerAdapter
 
 class LibraryFragment : Fragment() {
     private var _binding: FragmentLibraryBinding? = null
-
     private val binding get() = _binding!!
+
+    private val listTitle = listOf("Playlists", "Artist", "Albums")
+
+    private lateinit var pagerAdapter: LibraryMusicPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,5 +23,24 @@ class LibraryFragment : Fragment() {
     ): View? {
         _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        pagerAdapter = LibraryMusicPagerAdapter(this)
+        binding.fragmentLibraryViewPager.adapter = pagerAdapter
+
+        TabLayoutMediator(
+                binding.fragmentLibraryTablayout,
+                binding.fragmentLibraryViewPager) { tab, position ->
+            tab.text = listTitle[position]
+        }.attach()
+    }
+
+
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
