@@ -2,6 +2,8 @@ package com.machina.spotify_clone
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.Slider
 import com.google.android.material.transition.platform.MaterialSharedAxis
@@ -15,6 +17,11 @@ class DetailTrackActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = FragmentDetailTrackBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.fragmentDetailTrackToolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(false)
+        }
         setUpListener()
     }
 
@@ -41,6 +48,21 @@ class DetailTrackActivity: AppCompatActivity() {
 
                 binding.fragmentDetailTrackElapsed.text = text
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail_track, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> { false }
         }
     }
 

@@ -20,11 +20,18 @@ class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<B
     private val count = Random.nextInt(5, 26)
     private val downloaded = mutableListOf<Boolean>()
     private val artistList = mutableListOf<String>()
+    private val typeList = mutableListOf<Int>()
     private val dummyArtist = listOf("IU", "TAEYEON", "YEJI")
 
+
     init {
+        typeList.add(R.layout.vh_library_bar)
         repeat(count) { downloaded.add(Random.nextBoolean()) }
         repeat(count) { artistList.add(dummyArtist[Random.nextInt(0, 3)])}
+        repeat(count - 1) {
+            if (fragmentType == LibraryMusicPagerFragment.FRAGMENT_ARTIST) typeList.add(R.layout.vh_library_artist)
+            else typeList.add(R.layout.vh_library_playlist)
+        }
     }
 
 
@@ -46,7 +53,7 @@ class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<B
 
     private fun getPlaylistVH(viewType: Int, inflater: LayoutInflater, parent: ViewGroup): BaseLibraryVH {
         return when (viewType) {
-            0 -> {
+            R.layout.vh_library_bar -> {
                 val binding = VhLibraryBarBinding.inflate(inflater, parent, false)
                 LibraryBarVH(binding)
             }
@@ -59,7 +66,7 @@ class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<B
 
     private fun getArtistVH(viewType: Int, inflater: LayoutInflater, parent: ViewGroup): BaseLibraryVH {
         return when (viewType) {
-            0 -> {
+            R.layout.vh_library_bar -> {
                 val binding = VhLibraryBarBinding.inflate(inflater, parent, false)
                 LibraryBarVH(binding)
             }
@@ -72,7 +79,7 @@ class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<B
 
     private fun getAlbumVH(viewType: Int, inflater: LayoutInflater, parent: ViewGroup): BaseLibraryVH {
         return when (viewType) {
-            0 -> {
+            R.layout.vh_library_bar -> {
                 val binding = VhLibraryBarBinding.inflate(inflater, parent, false)
                 LibraryBarVH(binding)
             }
@@ -116,10 +123,7 @@ class LibraryMusicAdapter(private val fragmentType: Int): RecyclerView.Adapter<B
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> 0
-            else -> 1
-        }
+        return typeList[position]
     }
 
     override fun getItemCount(): Int {
@@ -188,6 +192,7 @@ class LibraryPlaylistVH(
 
     private fun albumBind(artist: String) {
         binding.vhLibraryPlaylistTitle.text = "Album name"
+        playlistImg.setImageResource(R.drawable.album_cover_hylt)
         binding.vhLibraryPlaylistArtist.text = artist
         binding.vhLibraryPlaylistDownloaded.visibility = View.GONE
     }

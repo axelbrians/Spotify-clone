@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_home_grid"
+    tools:layout_width="200dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="6dp">
+                <ImageView
+                    android:id="@+id/vh_home_grid_img"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/solar_dp"
+                    android:scaleType="centerInside"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="February"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+</LinearLayout>
