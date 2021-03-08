@@ -3,6 +3,7 @@ package com.machina.spotify_clone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.machina.spotify_clone.databinding.ActivityMainBinding
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setUpListener() {
-        binding.bottomSheetContainer.setOnClickListener {
+        binding.activityMainBtmSheetContainer.setOnClickListener {
             val intent = Intent(this, DetailTrackActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up)
