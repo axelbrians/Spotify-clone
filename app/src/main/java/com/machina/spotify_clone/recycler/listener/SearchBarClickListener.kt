@@ -1,5 +1,5 @@
 package com.machina.spotify_clone.recycler.listener
 
-interface OnSearchBarClickListener {
+interface SearchBarClickListener {
     fun onSearchBarClick()
 }

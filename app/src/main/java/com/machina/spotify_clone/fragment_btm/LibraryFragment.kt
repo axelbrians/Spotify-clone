@@ -1,4 +1,4 @@
-package com.machina.spotify_clone.bottom_fragment
+package com.machina.spotify_clone.fragment_btm
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

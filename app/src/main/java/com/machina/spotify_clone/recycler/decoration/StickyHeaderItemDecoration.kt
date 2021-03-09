@@ -7,12 +7,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.machina.spotify_clone.recycler.listener.OnSearchBarClickListener
+import com.machina.spotify_clone.recycler.listener.SearchBarClickListener
 
 
 class StickyHeaderItemDecoration(
         private val mListener: StickyHeaderInterface,
-        private val onSearchBarClickListener: OnSearchBarClickListener,
+        private val searchBarClickListener: SearchBarClickListener,
         recyclerView: RecyclerView)
     : RecyclerView.ItemDecoration() {
 
@@ -23,7 +23,7 @@ class StickyHeaderItemDecoration(
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 return if (e.y <= mStickyHeaderHeight && rv.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
                     // implement clickListener on header here
-                    onSearchBarClickListener.onSearchBarClick()
+                    searchBarClickListener.onSearchBarClick()
                     Log.d(TAG, "Sticky header clicked")
                     true
                 } else {

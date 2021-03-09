@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_playlist_more"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="More"
+        android:orderInCategory="2"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_playlist_add"
+        android:icon="@drawable/ic_baseline_person_add_alt_1_24"
+        android:title="Add collaborator"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+</menu>

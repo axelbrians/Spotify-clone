@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
 import com.machina.spotify_clone.databinding.RecyclerParentGridBinding
 import com.machina.spotify_clone.recycler.decoration.EqualSpacingItemDecoration
+import com.machina.spotify_clone.recycler.listener.PlaylistClickListener
 import kotlin.random.Random
 
-class HomeParentAdapter: RecyclerView.Adapter<HomeParentBaseViewHolder>() {
+class HomeParentAdapter(private val playlistClickListener: PlaylistClickListener)
+    : RecyclerView.Adapter<HomeParentBaseViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
     private val itemType = mutableListOf<Int>()
@@ -72,7 +74,7 @@ class HomeParentAdapter: RecyclerView.Adapter<HomeParentBaseViewHolder>() {
                         RecyclerView.VERTICAL,
                         false
                 )
-                holder.onBind(layoutManager, HomeChildGridAdapter(), viewPool)
+                holder.onBind(layoutManager, HomeChildGridAdapter(playlistClickListener), viewPool)
             }
             is RecyclerRecentlyVH -> {
                 val childLayoutManager = LinearLayoutManager(

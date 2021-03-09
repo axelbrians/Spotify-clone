@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.databinding.VhHomeGridBinding
+import com.machina.spotify_clone.recycler.listener.PlaylistClickListener
 import kotlin.random.Random
 
-class HomeChildGridAdapter: RecyclerView.Adapter<HomeGridVH>() {
+class HomeChildGridAdapter(private val playlistClickListener: PlaylistClickListener)
+    : RecyclerView.Adapter<HomeGridVH>() {
 
     private val count = Random.nextInt(4, 7)
 
@@ -18,7 +20,7 @@ class HomeChildGridAdapter: RecyclerView.Adapter<HomeGridVH>() {
     }
 
     override fun onBindViewHolder(holder: HomeGridVH, position: Int) {
-
+        holder.onBind(playlistClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -28,4 +30,12 @@ class HomeChildGridAdapter: RecyclerView.Adapter<HomeGridVH>() {
 
 }
 
-class HomeGridVH(binding: VhHomeGridBinding): RecyclerView.ViewHolder(binding.root)
+class HomeGridVH(private val binding: VhHomeGridBinding)
+    : RecyclerView.ViewHolder(binding.root) {
+
+    fun onBind(listener: PlaylistClickListener) {
+        binding.vhHomeGridContainer.setOnClickListener {
+            listener.onPlaylistClick()
+        }
+    }
+}

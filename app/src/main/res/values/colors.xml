@@ -10,6 +10,7 @@
 
 
     <color name="green_active">#20B557</color>
+    <color name="green_deactivated">#154D2A</color>
     <color name="black_statusbar">#0A0A0A</color>
     <color name="black_background">#121212</color>
     <color name="black_grid">#2A2A2A</color>

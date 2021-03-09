@@ -1,24 +1,22 @@
-package com.machina.spotify_clone.bottom_fragment
+package com.machina.spotify_clone.fragment_btm
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.DetailTrackActivity
-import com.machina.spotify_clone.R
 import com.machina.spotify_clone.databinding.FragmentSearchBinding
 import com.machina.spotify_clone.recycler.decoration.StickyHeaderItemDecoration
-import com.machina.spotify_clone.recycler.listener.OnSearchBarClickListener
+import com.machina.spotify_clone.recycler.listener.SearchBarClickListener
 import com.machina.spotify_clone.recycler.search.SearchAdapter
 
 class SearchFragment
-    : Fragment(), OnSearchBarClickListener {
+    : Fragment(), SearchBarClickListener {
     private var _binding: FragmentSearchBinding? = null
 
     private val binding get() = _binding!!

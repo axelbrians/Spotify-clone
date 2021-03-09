@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_background"
-    tools:context=".bottom_fragment.SearchFragment">
+    tools:context=".fragment_btm.SearchFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_search_recycler"

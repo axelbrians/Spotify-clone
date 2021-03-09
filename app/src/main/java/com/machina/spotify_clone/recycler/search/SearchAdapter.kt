@@ -13,11 +13,11 @@ import com.machina.spotify_clone.databinding.VhSearchGreetingBinding
 import com.machina.spotify_clone.databinding.VhSearchHeaderBinding
 import com.machina.spotify_clone.recycler.decoration.EqualSpacingItemDecoration
 import com.machina.spotify_clone.recycler.decoration.StickyHeaderInterface
-import com.machina.spotify_clone.recycler.listener.OnSearchBarClickListener
+import com.machina.spotify_clone.recycler.listener.SearchBarClickListener
 import kotlin.random.Random
 
 class SearchAdapter(
-        private val onSearchBarClickListener: OnSearchBarClickListener
+        private val searchBarClickListener: SearchBarClickListener
 ):
         RecyclerView.Adapter<BaseSearchVH>(),
         StickyHeaderInterface {
@@ -43,7 +43,7 @@ class SearchAdapter(
                         parent ,
                         false)
 
-                return SearchBarVH(binding, onSearchBarClickListener)
+                return SearchBarVH(binding, searchBarClickListener)
             }
             2 -> {
                 val binding = VhSearchHeaderBinding.inflate(
@@ -136,12 +136,12 @@ class SearchHeaderVH(binding: VhSearchGreetingBinding): BaseSearchVH(binding.roo
 
 class SearchBarVH(
         private val binding: VhSearchBarBinding,
-        private val onSearchBarClickListener: OnSearchBarClickListener)
+        private val searchBarClickListener: SearchBarClickListener)
     : BaseSearchVH(binding.root) {
 
     fun onBind() {
         binding.vhSearchBarLinearLayout.setOnClickListener {
-            onSearchBarClickListener.onSearchBarClick()
+            searchBarClickListener.onSearchBarClick()
         }
     }
 
