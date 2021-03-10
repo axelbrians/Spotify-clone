@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_playlist_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black_background">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/fragment_playlist_appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black_background"
+        android:background="@android:color/transparent"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -23,10 +25,28 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/fragment_playlist_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="72dp"
                 android:theme="@style/ToolbarIconColor"
-                app:menu="@menu/menu_playlist"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_audio_queue"
+                    app:tint="@color/white"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/fragment_playlist_toolbar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_gravity="top|center_horizontal"
+                    android:text="February"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/ToolbarSubTitleTextAppearance"/>
+
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -39,7 +59,7 @@
                     android:id="@+id/fragment_playlist_img"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="14dp"
                     android:layout_gravity="center_horizontal"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
@@ -52,7 +72,7 @@
                     android:id="@+id/fragment_playlist_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="24dp"
                     android:text="February"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -65,7 +85,7 @@
                     android:id="@+id/fragment_playlist_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="4dp"
                     android:paddingBottom="32dp"
                     android:text="BY AXEL"
                     android:textSize="11sp"
@@ -107,6 +127,7 @@
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textAllCaps="true"
+        android:textStyle="bold"
         app:backgroundTint="@color/green_active"
         app:shapeAppearance="@style/FabAppearance"
         app:layout_anchor="@id/fragment_playlist_appbar_layout"

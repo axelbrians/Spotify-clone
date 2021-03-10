@@ -4,5 +4,5 @@
     <item
         android:color="@color/green_deactivated"
         android:state_checked="true" />
-    <item android:color="@color/grey_background"/>
+    <item android:color="#5A5A5A"/>
 </selector>

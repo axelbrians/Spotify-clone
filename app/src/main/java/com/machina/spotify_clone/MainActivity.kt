@@ -3,7 +3,11 @@ package com.machina.spotify_clone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.machina.spotify_clone.databinding.ActivityMainBinding
@@ -24,15 +28,36 @@ class MainActivity : AppCompatActivity() {
         binding.activityMainBtmSheetContainer.setOnClickListener {
             val intent = Intent(this, DetailTrackActivity::class.java)
             startActivity(intent)
+                                    // enter animation      exit animation
             overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up)
         }
     }
 
     private fun setUpNavigation() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val option = NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .setEnterAnim(R.anim.fade_in)
+                .setPopUpTo(navController.graph.startDestination, false)
+                .build()
 
-        NavigationUI.setupWithNavController(
-            binding.activityMainBtmNav,
-            navHostFragment.navController)
+        binding.activityMainBtmNav.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> { navController.navigate(item.itemId, null, option) }
+                R.id.searchFragment -> { navController.navigate(item.itemId, null, option) }
+                R.id.libraryFragment -> { navController.navigate(item.itemId, null, option) }
+            }
+            true
+        }
+
+        binding.activityMainBtmNav.setOnNavigationItemReselectedListener { item ->
+            return@setOnNavigationItemReselectedListener
+        }
+
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

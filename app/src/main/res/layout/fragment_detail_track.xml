@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_detail_track_container"
@@ -156,7 +157,6 @@
             app:layout_constraintStart_toStartOf="@+id/fragment_detail_track_shuffle"
             app:layout_constraintTop_toBottomOf="@+id/fragment_detail_track_shuffle" />
 
-
         <ImageView
             android:id="@+id/fragment_detail_track_previous"
             android:layout_width="40dp"
@@ -201,7 +201,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/fragment_detail_track_play"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_detail_track_slider" />
-
 
         <ImageView
             android:id="@+id/fragment_detail_track_device"

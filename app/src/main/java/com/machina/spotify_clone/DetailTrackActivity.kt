@@ -1,10 +1,12 @@
 package com.machina.spotify_clone
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.slider.Slider
 import com.google.android.material.transition.platform.MaterialSharedAxis
 import com.machina.spotify_clone.R
@@ -16,6 +18,7 @@ class DetailTrackActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentDetailTrackBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         setSupportActionBar(binding.fragmentDetailTrackToolbar)
         supportActionBar?.apply {
@@ -68,10 +71,11 @@ class DetailTrackActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+                                // enter animation    exit animation
         overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
     }
 
     companion object {
-        private const val TAG = "dummyActivity"
+        private const val TAG = "DetailTrackActivity"
     }
 }
