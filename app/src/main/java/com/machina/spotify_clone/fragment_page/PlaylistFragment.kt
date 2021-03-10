@@ -42,7 +42,9 @@ class PlaylistFragment: Fragment() {
         binding.fragmentPlaylistImg.setImageResource(drawableId)
         val bitMap = BitmapFactory.decodeResource(context?.resources, drawableId)
         val paletteBuilder = Palette.Builder(bitMap).maximumColorCount(4)
-        val palette = paletteBuilder.generate().getVibrantColor(0)
+        var palette = paletteBuilder.generate().getVibrantColor(0)
+        if (palette == 0) palette = paletteBuilder.generate().getMutedColor(0)
+        if (palette == 0) palette = paletteBuilder.generate().getDominantColor(0)
 
         val color = IntArray(2)
         color[0] = palette

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="Recommended Songs"
             android:textColor="@color/grey_deactivated"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
             android:layout_marginTop="4dp"
             android:text="Based on the songs in this playlist"
             android:textColor="@color/grey_deactivated"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:visibility="invisible"
             tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/vh_playlist_recommendation_title"
@@ -82,14 +82,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gateway"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MINNIE ((G)I-DLE) · My Dangerous Wife"
                     android:textColor="@color/grey_deactivated"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <ImageView
@@ -118,14 +118,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gateway"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MINNIE ((G)I-DLE) · My Dangerous Wife"
                     android:textColor="@color/grey_deactivated"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <ImageView
@@ -154,14 +154,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gateway"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MINNIE ((G)I-DLE) · My Dangerous Wife"
                     android:textColor="@color/grey_deactivated"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <ImageView
@@ -190,14 +190,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gateway"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MINNIE ((G)I-DLE) · My Dangerous Wife"
                     android:textColor="@color/grey_deactivated"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <ImageView
@@ -226,14 +226,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gateway"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="MINNIE ((G)I-DLE) · My Dangerous Wife"
                     android:textColor="@color/grey_deactivated"
-                    android:textSize="11sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <ImageView
@@ -250,11 +250,11 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             android:background="@drawable/bg_refresh_btn"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="9dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="12dp"
             android:text="REFRESH"
             android:textStyle="bold"
-            android:textSize="12sp"/>
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

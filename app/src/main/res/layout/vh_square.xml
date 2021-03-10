@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/vh_square_img"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="165dp"
+        android:layout_height="165dp"
         android:src="@drawable/album_cover_bbibbi"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="IU, BLACKPINK, TAEYEON, HEIZE, (G)I_DLE, SinB"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:textColor="@color/grey_deactivated"
         app:layout_constraintEnd_toEndOf="@+id/vh_square_img"
         app:layout_constraintStart_toStartOf="@+id/vh_square_img"

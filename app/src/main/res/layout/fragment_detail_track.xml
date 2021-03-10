@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:text="Playlist"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:text="TAEYEON"
                 android:textColor="@color/grey_deactivated"
-                android:textSize="13sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="1:35"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textColor="@color/grey_deactivated"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_detail_track_slider"
             app:layout_constraintStart_toStartOf="@+id/fragment_detail_track_slider" />
@@ -132,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:text="2:43"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textColor="@color/grey_deactivated"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_detail_track_slider"
             app:layout_constraintEnd_toEndOf="@+id/fragment_detail_track_slider" />

@@ -31,7 +31,7 @@ class HomeParentAdapter(private val playlistClickListener: PlaylistClickListener
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeParentBaseViewHolder {
-        val itemDecoration = EqualSpacingItemDecoration(24)
+        val itemDecoration = EqualSpacingItemDecoration(40)
         val inflater = LayoutInflater.from(parent.context)
         val context = parent.context
         return when (viewType) {

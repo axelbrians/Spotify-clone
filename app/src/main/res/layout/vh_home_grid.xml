@@ -16,8 +16,8 @@
             app:cardCornerRadius="6dp">
                 <ImageView
                     android:id="@+id/vh_home_grid_img"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:src="@drawable/solar_dp"
                     android:scaleType="centerInside"/>
 

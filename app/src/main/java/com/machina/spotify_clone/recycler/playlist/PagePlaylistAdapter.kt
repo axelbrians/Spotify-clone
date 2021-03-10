@@ -97,20 +97,23 @@ class PlaylistRecommendationVH(private val binding: VhPlaylistReommendationBindi
     }
 
     fun onBind() {
-        arrowToggle.setOnClickListener {
-            if (listContainer.visibility == View.VISIBLE) {
-                arrowToggle.startAnimation(counterRotate)
-                val color = Color.parseColor("#A7A7A7")
-                title.setTextColor(color)
-                subTitle.visibility = View.INVISIBLE
-                listContainer.visibility = View.GONE
-            } else {
-                arrowToggle.startAnimation(rotate)
-                val color = Color.parseColor("#FFFFFF")
-                title.setTextColor(color)
-                subTitle.visibility = View.VISIBLE
-                listContainer.visibility = View.VISIBLE
-            }
+        arrowToggle.setOnClickListener { toggleRecommended() }
+        title.setOnClickListener { toggleRecommended() }
+    }
+
+    private fun toggleRecommended() {
+        if (listContainer.visibility == View.VISIBLE) {
+            arrowToggle.startAnimation(counterRotate)
+            val color = Color.parseColor("#A7A7A7")
+            title.setTextColor(color)
+            subTitle.visibility = View.INVISIBLE
+            listContainer.visibility = View.GONE
+        } else {
+            arrowToggle.startAnimation(rotate)
+            val color = Color.parseColor("#FFFFFF")
+            title.setTextColor(color)
+            subTitle.visibility = View.VISIBLE
+            listContainer.visibility = View.VISIBLE
         }
     }
 }

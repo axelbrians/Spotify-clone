@@ -43,6 +43,7 @@
                     android:layout_gravity="top|center_horizontal"
                     android:text="February"
                     android:textSize="14sp"
+                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:textAppearance="@style/ToolbarSubTitleTextAppearance"/>
 
