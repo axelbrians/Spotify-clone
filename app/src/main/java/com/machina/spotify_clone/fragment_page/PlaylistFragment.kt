@@ -65,7 +65,6 @@ class PlaylistFragment: Fragment() {
         }
 
         val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        val decoration = EqualSpacingItemDecoration(40)
 
         binding.fragmentPlaylistRecycler.apply {
             adapter = PagePlaylistAdapter()

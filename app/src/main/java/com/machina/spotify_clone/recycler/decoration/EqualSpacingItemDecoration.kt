@@ -70,6 +70,7 @@ class EqualSpacingItemDecoration(
         }
     }
 
+    // get display mode based on the LayoutManager
     private fun resolveDisplayMode(layoutManager: RecyclerView.LayoutManager?): Int {
         if (layoutManager is GridLayoutManager) return GRID
         return if (layoutManager!!.canScrollHorizontally()) HORIZONTAL else VERTICAL

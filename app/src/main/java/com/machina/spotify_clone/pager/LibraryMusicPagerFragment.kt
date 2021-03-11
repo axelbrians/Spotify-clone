@@ -42,8 +42,8 @@ class LibraryMusicPagerFragment(private val fragmentType: Int): Fragment() {
     }
 
     companion object {
-        const val FRAGMENT_PLAYLIST = 1
-        const val FRAGMENT_ARTIST = 2
-        const val FRAGMENT_ALBUM = 3
+        const val FRAGMENT_PLAYLIST = 101
+        const val FRAGMENT_ARTIST = 102
+        const val FRAGMENT_ALBUM = 103
     }
 }

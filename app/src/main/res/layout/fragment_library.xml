@@ -17,6 +17,8 @@
         app:tabIndicatorFullWidth="false"
         app:tabMode="scrollable"
         app:tabGravity="fill"
+        app:tabPaddingBottom="0dp"
+        app:tabPaddingTop="12dp"
         app:layout_constraintTop_toTopOf="parent">
     </com.google.android.material.tabs.TabLayout>
 

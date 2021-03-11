@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
 import com.machina.spotify_clone.databinding.FragmentHomeBinding
 import com.machina.spotify_clone.recycler.home.HomeParentAdapter
+import com.machina.spotify_clone.recycler.listener.ArtistClickListener
 import com.machina.spotify_clone.recycler.listener.PlaylistClickListener
 
-class HomeFragment : Fragment(), PlaylistClickListener {
+class HomeFragment : Fragment(), PlaylistClickListener, ArtistClickListener {
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
@@ -26,7 +27,8 @@ class HomeFragment : Fragment(), PlaylistClickListener {
         val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.fragmentHomeRecyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = HomeParentAdapter(this@HomeFragment)
+            adapter = HomeParentAdapter(this@HomeFragment,
+                    this@HomeFragment)
         }
 
 
@@ -35,6 +37,10 @@ class HomeFragment : Fragment(), PlaylistClickListener {
 
     override fun onPlaylistClick() {
         findNavController().navigate(R.id.action_homeFragment_to_playlistFragment)
+    }
+
+    override fun onArtistClick() {
+        findNavController().navigate(R.id.action_homeFragment_to_artistFragment)
     }
 
     override fun onDestroy() {

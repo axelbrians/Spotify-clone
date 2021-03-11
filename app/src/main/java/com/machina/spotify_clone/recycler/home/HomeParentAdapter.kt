@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
 import com.machina.spotify_clone.databinding.RecyclerParentGridBinding
 import com.machina.spotify_clone.recycler.decoration.EqualSpacingItemDecoration
+import com.machina.spotify_clone.recycler.listener.ArtistClickListener
 import com.machina.spotify_clone.recycler.listener.PlaylistClickListener
 import kotlin.random.Random
 
-class HomeParentAdapter(private val playlistClickListener: PlaylistClickListener)
+class HomeParentAdapter(
+        private val playlistClickListener: PlaylistClickListener,
+        private val artistClickListener: ArtistClickListener)
     : RecyclerView.Adapter<HomeParentBaseViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -81,7 +84,7 @@ class HomeParentAdapter(private val playlistClickListener: PlaylistClickListener
                     holder.recyclerView.context,
                     RecyclerView.HORIZONTAL,
                     false)
-                holder.onBind(childLayoutManager, HomeChildRecentlyAdapter(), viewPool)
+                holder.onBind(childLayoutManager, HomeChildRecentlyAdapter(artistClickListener), viewPool)
             }
             is RecyclerAlbumVH -> {
                 val childLayoutManager = LinearLayoutManager(

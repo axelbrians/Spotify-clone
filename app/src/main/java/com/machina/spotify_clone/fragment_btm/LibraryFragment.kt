@@ -13,6 +13,7 @@ class LibraryFragment : Fragment() {
     private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding!!
 
+    // list of string to be displayed in tab layout
     private val listTitle = listOf("Playlists", "Artist", "Albums")
 
     private lateinit var pagerAdapter: LibraryMusicPagerAdapter

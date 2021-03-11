@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
+import com.machina.spotify_clone.databinding.VhCircleSmallBinding
+import com.machina.spotify_clone.databinding.VhSquareSmallBinding
+import com.machina.spotify_clone.recycler.listener.ArtistClickListener
 import kotlin.random.Random
 
-class HomeChildRecentlyAdapter: RecyclerView.Adapter<HomeBaseSmallVH>() {
+class HomeChildRecentlyAdapter(private val artistClickListener: ArtistClickListener): RecyclerView.Adapter<HomeBaseSmallVH>() {
 
     var count = 0
     private val itemType = mutableListOf<Int>()
@@ -23,20 +26,15 @@ class HomeChildRecentlyAdapter: RecyclerView.Adapter<HomeBaseSmallVH>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeBaseSmallVH {
-        when (viewType) {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
             R.layout.vh_square_small -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(viewType, parent, false)
-
-                return HomeSquareSmallVH(view)
+                val binding = VhSquareSmallBinding.inflate(inflater, parent, false)
+                HomeSquareSmallVH(binding)
             }
             else -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(viewType, parent, false)
-
-                return HomeCircleSmallVH(view)
+                val binding = VhCircleSmallBinding.inflate(inflater, parent, false)
+                HomeCircleSmallVH(binding)
             }
         }
     }
@@ -44,7 +42,7 @@ class HomeChildRecentlyAdapter: RecyclerView.Adapter<HomeBaseSmallVH>() {
     override fun onBindViewHolder(holder: HomeBaseSmallVH, position: Int) {
         when (holder) {
             is HomeSquareSmallVH -> { holder.onBind("Playlist name") }
-            is HomeCircleSmallVH -> { holder.onBind("TAEYEON") }
+            is HomeCircleSmallVH -> { holder.onBind("TAEYEON", artistClickListener) }
         }
     }
 
@@ -57,18 +55,21 @@ class HomeChildRecentlyAdapter: RecyclerView.Adapter<HomeBaseSmallVH>() {
     }
 }
 
-class HomeSquareSmallVH(view: View): HomeBaseSmallVH(view) {
-    private val textView: TextView = view.findViewById(R.id.vh_square_small_text)
+class HomeSquareSmallVH(private val binding: VhSquareSmallBinding): HomeBaseSmallVH(binding.root) {
+    private val textView: TextView = binding.vhSquareSmallText
 
     fun onBind(text: String) {
         textView.text = text
     }
 }
 
-class HomeCircleSmallVH(view: View): HomeBaseSmallVH(view) {
-    private val textView: TextView = view.findViewById(R.id.vh_circle_small_text)
+class HomeCircleSmallVH(private val binding: VhCircleSmallBinding): HomeBaseSmallVH(binding.root) {
+    private val textView: TextView = binding.vhCircleSmallText
 
-    fun onBind(text: String) {
+    fun onBind(text: String, listener: ArtistClickListener) {
         textView.text = text
+        binding.vhCircleSmallContainer.setOnClickListener {
+            listener.onArtistClick()
+        }
     }
 }
