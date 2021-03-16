@@ -72,14 +72,18 @@ class ArtistFragment: Fragment() {
         }
 
 
-        var scaleFactor: Float
-        var alphaFactor: Float
-        var fontFactor: Float
+        var scaleFactor: Float // constant for scaling image in toolbar
+        var alphaFactor: Float // constant used for determine alpha of an image in toolbar
+        var fontFactor: Float // constant user for changing alpha of a textview in toolbar
         val appBar = binding.fragmentArtistAppbarLayout
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             alphaFactor = 0.65f - (abs(verticalOffset / appBarLayout.totalScrollRange.toFloat()) * 0.65f)
             scaleFactor = 1 - (abs(verticalOffset/ appBarLayout.totalScrollRange.toFloat()) * 0.09f) + 0.17f
+
+            // get the percentage of scrolling offset
             fontFactor = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+
+            // change font factor to only scaling between 0 to 1.0 after reaching half of its scrollRange
             fontFactor = if (fontFactor < 0.5) { 0f }
             else abs((verticalOffset + (appBarLayout.totalScrollRange.toFloat()/2)) / (appBarLayout.totalScrollRange.toFloat() / 2))
 
@@ -98,7 +102,7 @@ class ArtistFragment: Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_playlist, menu)
+        inflater.inflate(R.menu.menu_detail_track, menu)
     }
 
     override fun onDestroy() {

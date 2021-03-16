@@ -9,27 +9,27 @@
     tools:background="@color/black_background">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/vh_circle_small_img"
-        android:layout_width="119dp"
-        android:layout_height="125dp"
-        android:layout_marginHorizontal="3dp"
-        android:src="@drawable/taeyeon_dp"
+        android:id="@+id/vh_artist_circle_img"
+        android:layout_width="124dp"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="6dp"
+        android:src="@drawable/lee_hi_cover"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vh_circle_small_text"
+        android:id="@+id/vh_artist_circle_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="TAEYEON"
+        android:text="LeeHi"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/vh_circle_small_img"
-        app:layout_constraintStart_toStartOf="@+id/vh_circle_small_img"
-        app:layout_constraintTop_toBottomOf="@+id/vh_circle_small_img" />
+        app:layout_constraintEnd_toEndOf="@+id/vh_artist_circle_img"
+        app:layout_constraintStart_toStartOf="@+id/vh_artist_circle_img"
+        app:layout_constraintTop_toBottomOf="@+id/vh_artist_circle_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
