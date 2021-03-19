@@ -13,6 +13,10 @@ import kotlin.random.Random
 
 class HomeChildRecentlyAdapter(private val artistClickListener: ArtistClickListener): RecyclerView.Adapter<HomeBaseSmallVH>() {
 
+    /*
+    count is used as item count in this recycler
+    itemType for each item that exist generated randomly inside init block
+     */
     var count = 0
     private val itemType = mutableListOf<Int>()
 

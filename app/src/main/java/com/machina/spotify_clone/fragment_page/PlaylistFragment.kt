@@ -31,6 +31,7 @@ class PlaylistFragment: Fragment() {
         _binding = FragmentPlaylistBinding.inflate(inflater, container, false)
 
         initiateUI()
+        initiateRV()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_playlistFragment_to_homeFragment)
         }
@@ -40,24 +41,36 @@ class PlaylistFragment: Fragment() {
 
     private fun initiateUI() {
         binding.fragmentPlaylistImg.setImageResource(drawableId)
+
+        // create Bitmap to extract its color later on
         val bitMap = BitmapFactory.decodeResource(context?.resources, drawableId)
+
+        // Palette is used to generate color based on the Bitmap
+        // it can generate several color which some option can be null
+        // Read more about Palette in official docs
         val paletteBuilder = Palette.Builder(bitMap).maximumColorCount(4)
         var palette = paletteBuilder.generate().getVibrantColor(0)
         if (palette == 0) palette = paletteBuilder.generate().getMutedColor(0)
         if (palette == 0) palette = paletteBuilder.generate().getDominantColor(0)
 
+        // this color Array used to create GradientDrawable effect that later will
+        // be applied to image header
         val color = IntArray(2)
         color[0] = palette
         color[1] = 0xFF121212.toInt()
-//        Log.d(TAG, "rgb: ${palette?.rgb} | hsl: ${palette?.hsl}")
         Log.d(TAG, "palette: $palette")
+
+        // Generate GradientDrawable based on the color that has been extracted
+        // from the Bitmap above with Palette
         val gradientDrawable = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
             color)
         gradientDrawable.cornerRadius = 0f
 
         binding.fragmentPlaylistAppbarLayout.background = gradientDrawable
+    }
 
+    private fun initiateRV() {
         val mActivity = activity as AppCompatActivity
         mActivity.apply {
             setSupportActionBar(binding.fragmentPlaylistToolbar)
@@ -82,9 +95,7 @@ class PlaylistFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.fragmentPlaylistToolbar.apply {
             setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            setNavigationOnClickListener {
-                findNavController().navigate(R.id.action_playlistFragment_to_homeFragment)
-            }
+            setNavigationOnClickListener { findNavController().navigate(R.id.action_playlistFragment_to_homeFragment) }
             setOnMenuItemClickListener{
                 when (it.itemId) {
                     R.id.menu_playlist_more -> {

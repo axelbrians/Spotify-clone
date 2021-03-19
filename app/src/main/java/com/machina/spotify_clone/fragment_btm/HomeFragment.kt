@@ -35,10 +35,12 @@ class HomeFragment : Fragment(), PlaylistClickListener, ArtistClickListener {
         return binding.root
     }
 
+    // handle click for opening PlaylistFragment
     override fun onPlaylistClick() {
         findNavController().navigate(R.id.action_homeFragment_to_playlistFragment)
     }
 
+    // handle click for opening ArtistFragment
     override fun onArtistClick() {
         findNavController().navigate(R.id.action_homeFragment_to_artistFragment)
     }

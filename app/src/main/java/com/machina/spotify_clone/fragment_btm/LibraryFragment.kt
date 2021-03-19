@@ -27,12 +27,16 @@ class LibraryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // creating adapter for TabLayout and attach it to ViewPager
         pagerAdapter = LibraryMusicPagerAdapter(this)
         binding.fragmentLibraryViewPager.adapter = pagerAdapter
 
+        // attach TabLayout and ViewPager, this function need to be called after
+        // TabLayout adapter above is attached
         TabLayoutMediator(
                 binding.fragmentLibraryTablayout,
-                binding.fragmentLibraryViewPager) { tab, position ->
+                binding.fragmentLibraryViewPager
+        ) { tab, position ->
             tab.text = listTitle[position]
         }.attach()
     }

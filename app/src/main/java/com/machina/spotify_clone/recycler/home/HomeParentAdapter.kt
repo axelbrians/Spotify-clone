@@ -2,24 +2,29 @@ package com.machina.spotify_clone.recycler.home
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
+import com.machina.spotify_clone.databinding.RecyclerParentAlbumBinding
 import com.machina.spotify_clone.databinding.RecyclerParentGridBinding
+import com.machina.spotify_clone.databinding.RecyclerParentRecentlyBinding
+import com.machina.spotify_clone.databinding.VhHomeFirstBinding
 import com.machina.spotify_clone.recycler.decoration.EqualSpacingItemDecoration
 import com.machina.spotify_clone.recycler.listener.ArtistClickListener
 import com.machina.spotify_clone.recycler.listener.PlaylistClickListener
-import kotlin.random.Random
 
 class HomeParentAdapter(
         private val playlistClickListener: PlaylistClickListener,
         private val artistClickListener: ArtistClickListener)
     : RecyclerView.Adapter<HomeParentBaseViewHolder>() {
 
+    /*
+    viewType here is hardcoded in init block,
+    viewType represent the viewType for each of the items in this recycler
+     */
     private val viewPool = RecyclerView.RecycledViewPool()
     private val itemType = mutableListOf<Int>()
 
@@ -36,30 +41,24 @@ class HomeParentAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeParentBaseViewHolder {
         val itemDecoration = EqualSpacingItemDecoration(40)
         val inflater = LayoutInflater.from(parent.context)
-        val context = parent.context
+
         return when (viewType) {
             R.layout.vh_home_first -> {
-                val view = LayoutInflater
-                    .from(context)
-                    .inflate(viewType, parent, false)
-                HomeFirstVH(view)
+                val binding = VhHomeFirstBinding.inflate(inflater, parent, false)
+                HomeFirstVH(binding)
             }
             R.layout.recycler_parent_grid -> {
                 val binding = RecyclerParentGridBinding.inflate(inflater, parent, false)
                 val decoration = EqualSpacingItemDecoration(24)
-                RecyclerHomeGridVH(binding, decoration)
+                RecyclerParentGrid(binding, decoration)
             }
             R.layout.recycler_parent_recently -> {
-                val view = LayoutInflater
-                    .from(context)
-                    .inflate(viewType, parent, false)
-                RecyclerRecentlyVH(view, itemDecoration)
+                val binding = RecyclerParentRecentlyBinding.inflate(inflater, parent, false)
+                RecyclerParentRecently(binding, itemDecoration)
             }
             else -> {
-                val view = LayoutInflater
-                    .from(context)
-                    .inflate(viewType, parent, false)
-                RecyclerAlbumVH(view, itemDecoration)
+                val binding = RecyclerParentAlbumBinding.inflate(inflater, parent, false)
+                RecyclerParentAlbum(binding, itemDecoration)
             }
         }
     }
@@ -70,28 +69,27 @@ class HomeParentAdapter(
                 holder.onBind("Good afternoon")
                 Log.d(TAG, "onBind Home")
             }
-            is RecyclerHomeGridVH -> {
+            is RecyclerParentGrid -> {
                 val layoutManager = GridLayoutManager(
-                        holder.rvContext,
+                        holder.recyclerView.context,
                         2,
                         RecyclerView.VERTICAL,
-                        false
-                )
+                        false)
                 holder.onBind(layoutManager, HomeChildGridAdapter(playlistClickListener), viewPool)
             }
-            is RecyclerRecentlyVH -> {
-                val childLayoutManager = LinearLayoutManager(
+            is RecyclerParentRecently -> {
+                val layoutManager = LinearLayoutManager(
                     holder.recyclerView.context,
                     RecyclerView.HORIZONTAL,
                     false)
-                holder.onBind(childLayoutManager, HomeChildRecentlyAdapter(artistClickListener), viewPool)
+                holder.onBind(layoutManager, HomeChildRecentlyAdapter(artistClickListener), viewPool)
             }
-            is RecyclerAlbumVH -> {
-                val childLayoutManager = LinearLayoutManager(
+            is RecyclerParentAlbum -> {
+                val layoutManager = LinearLayoutManager(
                     holder.recyclerView.context,
                     RecyclerView.HORIZONTAL,
                     false)
-                holder.onBind(childLayoutManager, HomeChildAlbumAdapter(), viewPool)
+                holder.onBind(layoutManager, HomeChildAlbumAdapter(), viewPool)
             }
         }
     }
@@ -114,24 +112,22 @@ class HomeParentAdapter(
     }
 }
 
-class HomeFirstVH(view: View): HomeParentBaseViewHolder(view) {
-    private val greeting: TextView = view.findViewById(R.id.vh_home_greeting)
+class HomeFirstVH(binding: VhHomeFirstBinding): HomeParentBaseViewHolder(binding.root) {
+    private val greeting: TextView = binding.vhHomeGreeting
 
     fun onBind(text: String) {
         greeting.text = text
     }
 }
 
-class RecyclerHomeGridVH(
+class RecyclerParentGrid(
         private val binding: RecyclerParentGridBinding,
         decoration: EqualSpacingItemDecoration)
     : HomeParentBaseViewHolder(binding.root){
 
-    val rvContext get() = binding.recyclerParentGridRecycler.context
+    val recyclerView = binding.recyclerParentGridRecycler
 
-    init {
-        binding.recyclerParentGridRecycler.addItemDecoration(decoration)
-    }
+    init { binding.recyclerParentGridRecycler.addItemDecoration(decoration) }
 
     fun onBind(mLayoutManager: GridLayoutManager,
                mAdapter: HomeChildGridAdapter,
@@ -145,12 +141,12 @@ class RecyclerHomeGridVH(
 
 }
 
-class RecyclerAlbumVH(view: View, decoration: EqualSpacingItemDecoration): HomeParentBaseViewHolder(view) {
+class RecyclerParentAlbum(
+        binding: RecyclerParentAlbumBinding,
+        decoration: EqualSpacingItemDecoration): HomeParentBaseViewHolder(binding.root) {
 
-    val recyclerView: RecyclerView = view.findViewById(R.id.recycler_parent_recycler_view)
-    init {
-        recyclerView.addItemDecoration(decoration)
-    }
+    val recyclerView: RecyclerView = binding.recyclerParentRecyclerView
+    init { recyclerView.addItemDecoration(decoration) }
 
     fun onBind(mLayoutManager: LinearLayoutManager,
                mAdapter: HomeChildAlbumAdapter,
@@ -163,12 +159,12 @@ class RecyclerAlbumVH(view: View, decoration: EqualSpacingItemDecoration): HomeP
     }
 }
 
-class RecyclerRecentlyVH(view: View, decoration: EqualSpacingItemDecoration): HomeParentBaseViewHolder(view) {
+class RecyclerParentRecently(
+        binding: RecyclerParentRecentlyBinding,
+        decoration: EqualSpacingItemDecoration): HomeParentBaseViewHolder(binding.root) {
 
-    val recyclerView: RecyclerView = view.findViewById(R.id.recycler_parent_recently_recycler)
-    init {
-        recyclerView.addItemDecoration(decoration)
-    }
+    val recyclerView: RecyclerView = binding.recyclerParentRecentlyRecycler
+    init { recyclerView.addItemDecoration(decoration) }
 
     fun onBind(mLayoutManager: LinearLayoutManager,
                mAdapter: HomeChildRecentlyAdapter,

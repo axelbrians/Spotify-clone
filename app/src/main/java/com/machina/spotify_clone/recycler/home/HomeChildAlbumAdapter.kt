@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.machina.spotify_clone.R
+import com.machina.spotify_clone.databinding.VhCircleBinding
+import com.machina.spotify_clone.databinding.VhSquareBinding
 import kotlin.random.Random
 
 class HomeChildAlbumAdapter: RecyclerView.Adapter<HomeBaseVH>() {
@@ -25,20 +27,16 @@ class HomeChildAlbumAdapter: RecyclerView.Adapter<HomeBaseVH>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeBaseVH {
+        val inflater = LayoutInflater.from(parent.context)
+
         when (viewType) {
             R.layout.vh_square -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(viewType, parent, false)
-
-                return HomeSquareVH(view)
+                val binding = VhSquareBinding.inflate(inflater, parent, false)
+                return SquareVH(binding)
             }
             else -> {
-                val view = LayoutInflater
-                    .from(parent.context)
-                    .inflate(viewType, parent, false)
-
-                return HomeCircleVH(view)
+                val binding = VhCircleBinding.inflate(inflater, parent, false)
+                return CircleVH(binding)
             }
         }
 
@@ -46,8 +44,8 @@ class HomeChildAlbumAdapter: RecyclerView.Adapter<HomeBaseVH>() {
 
     override fun onBindViewHolder(holder: HomeBaseVH, position: Int) {
         when (holder) {
-            is HomeSquareVH -> { holder.onBind("IU, BLACKPINK, TAEYEON, HEIZE, (G)I_DLE, SinB") }
-            is HomeCircleVH -> { holder.onBind("TAEYEON") }
+            is SquareVH -> { holder.onBind("IU, BLACKPINK, TAEYEON, HEIZE, (G)I_DLE, SinB") }
+            is CircleVH -> { holder.onBind("TAEYEON") }
         }
     }
 
@@ -61,16 +59,16 @@ class HomeChildAlbumAdapter: RecyclerView.Adapter<HomeBaseVH>() {
 
 }
 
-class HomeSquareVH(view: View): HomeBaseVH(view) {
-    private val textView: TextView = view.findViewById(R.id.vh_square_text)
+class SquareVH(binding: VhSquareBinding): HomeBaseVH(binding.root) {
+    private val textView: TextView = binding.vhSquareText
 
     fun onBind(text: String) {
         textView.text = text
     }
 }
 
-class HomeCircleVH(view: View): HomeBaseVH(view) {
-    private val textView: TextView = view.findViewById(R.id.vh_circle_text)
+class CircleVH(binding: VhCircleBinding): HomeBaseVH(binding.root) {
+    private val textView: TextView = binding.vhCircleText
 
     fun onBind(text: String) {
         textView.text = text

@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * not using usual setup for Navigation Component in order to achieve
+     * custom Animation when switching page within bottom nav
+     * the custom Animation is added in option variable
+    */
     private fun setUpNavigation() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_main_nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController

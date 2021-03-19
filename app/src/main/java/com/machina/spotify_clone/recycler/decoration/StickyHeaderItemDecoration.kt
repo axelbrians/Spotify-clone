@@ -20,9 +20,11 @@ class StickyHeaderItemDecoration(
 
     init {
         recyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
-
-            // this method is intercepting touch input on the recycler, and only intercept when the recycler
-            // on the RecyclerView.SCROLL_STATE_IDLE
+            /*
+            this method is intercepting touch input on the recycler, and only intercept when the recycler
+            on the RecyclerView.SCROLL_STATE_IDLE
+            the area that intercepted is equal to the item that want to be sticky
+            */
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 return if (e.y <= mStickyHeaderHeight && rv.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
                     searchBarClickListener.onSearchBarClick()

@@ -3,6 +3,10 @@ package com.machina.spotify_clone.pager
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+/*
+this class creating Fragment for each TabLayout item
+this adapter act like RecyclerView.Adapter but populate fragment for each tab item
+ */
 class LibraryMusicPagerAdapter(fragment: Fragment)
     : FragmentStateAdapter(fragment) {
 

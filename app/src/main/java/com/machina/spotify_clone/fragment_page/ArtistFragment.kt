@@ -53,11 +53,10 @@ class ArtistFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // this apply block set up the necessary for Toolbar in a fragment
         binding.fragmentArtistToolbar.apply {
             setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            setNavigationOnClickListener {
-                findNavController().navigate(R.id.action_artistFragment_to_homeFragment)
-            }
+            setNavigationOnClickListener { findNavController().navigate(R.id.action_artistFragment_to_homeFragment) }
             setOnMenuItemClickListener{
                 when (it.itemId) {
                     R.id.menu_playlist_more -> {
@@ -71,7 +70,10 @@ class ArtistFragment: Fragment() {
             }
         }
 
-
+        /*
+        below set of code is responsible to create effect on image header section in fragment
+        creating fading, and scaling effect when scrolled up
+         */
         var scaleFactor: Float // constant for scaling image in toolbar
         var alphaFactor: Float // constant used for determine alpha of an image in toolbar
         var fontFactor: Float // constant user for changing alpha of a textview in toolbar
@@ -92,6 +94,10 @@ class ArtistFragment: Fragment() {
         })
     }
 
+    /**
+     * this function called when the header section is scrolled up to update the view
+     * and creating some effect within each pixel scrolled
+     */
     private fun updateImg(alphaFactor: Float, scaleFactor: Float, fontFactor: Float) {
         binding.fragmentArtistImg.apply {
             scaleX = scaleFactor

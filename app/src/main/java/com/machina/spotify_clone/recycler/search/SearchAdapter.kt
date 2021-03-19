@@ -18,18 +18,26 @@ import kotlin.random.Random
 
 class SearchAdapter(
         private val searchBarClickListener: SearchBarClickListener
-):
-        RecyclerView.Adapter<BaseSearchVH>(),
-        StickyHeaderInterface {
+): RecyclerView.Adapter<BaseSearchVH>(), StickyHeaderInterface {
 
-    private val itemType = mutableListOf(0, 1, 2, 3, 2, 3)
+    private val itemType = mutableListOf<Int>()
     private val count = itemType.size
 
+    init {
+        itemType.apply {
+            add(R.layout.vh_search_greeting)
+            add(R.layout.vh_search_bar)
+            add(R.layout.vh_search_header)
+            add(R.layout.recycler_parent_search_content)
+            add(R.layout.vh_search_header)
+            add(R.layout.recycler_parent_search_content)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseSearchVH {
         val layoutInflater = LayoutInflater.from(parent.context)
         when (viewType) {
-            0 -> {
+            R.layout.vh_search_greeting -> {
                 val binding = VhSearchGreetingBinding.inflate(
                         layoutInflater,
                         parent,
@@ -37,7 +45,7 @@ class SearchAdapter(
 
                 return SearchHeaderVH(binding)
             }
-            1 -> {
+            R.layout.vh_search_bar -> {
                 val binding = VhSearchBarBinding.inflate(
                         layoutInflater,
                         parent ,
@@ -45,7 +53,7 @@ class SearchAdapter(
 
                 return SearchBarVH(binding, searchBarClickListener)
             }
-            2 -> {
+            R.layout.vh_search_header -> {
                 val binding = VhSearchHeaderBinding.inflate(
                         layoutInflater,
                         parent,
@@ -74,8 +82,7 @@ class SearchAdapter(
                         holder.binding.recyclerParentSearchRecycler.context,
                         2,
                         RecyclerView.VERTICAL,
-                        false
-                    )
+                        false)
                     holder.onBind(adapter, childLayoutManager)
                 }
                 if (position > 3) {
@@ -85,8 +92,7 @@ class SearchAdapter(
                         holder.binding.recyclerParentSearchRecycler.context,
                     2,
                         RecyclerView.VERTICAL,
-                        false
-                    )
+                        false)
                     holder.onBind(adapter, childLayoutManager)
                 }
             }
@@ -104,6 +110,9 @@ class SearchAdapter(
         return count
     }
 
+    /*
+    below function is implementation for sticky header
+     */
     override fun getHeaderPositionForItem(itemPosition: Int): Int {
         var position = itemPosition
         var headerPosition = 0
@@ -152,8 +161,9 @@ class SearchContentHeader(binding: VhSearchHeaderBinding): BaseSearchVH(binding.
 
 
 
-class SearchRecyclerVH(val binding: RecyclerParentSearchContentBinding,
-                       itemDecoration: EqualSpacingItemDecoration)
+class SearchRecyclerVH(
+        val binding: RecyclerParentSearchContentBinding,
+        itemDecoration: EqualSpacingItemDecoration)
     : BaseSearchVH(binding.root) {
 
     init {
