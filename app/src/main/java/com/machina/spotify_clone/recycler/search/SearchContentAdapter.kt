@@ -1,5 +1,6 @@
 package com.machina.spotify_clone.recycler.search
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -20,6 +21,7 @@ class SearchContentAdapter(private val size: Int): RecyclerView.Adapter<SearchCo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchContentVH {
+        Log.d("search", "content holder created")
         val binding = VhSearchContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchContentVH(binding)
     }

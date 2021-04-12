@@ -1,5 +1,6 @@
 package com.machina.spotify_clone.recycler.search
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,6 @@ class SearchAdapter(
 ): RecyclerView.Adapter<BaseSearchVH>(), StickyHeaderInterface {
 
     private val itemType = mutableListOf<Int>()
-    private val count = itemType.size
 
     init {
         itemType.apply {
@@ -86,11 +86,11 @@ class SearchAdapter(
                     holder.onBind(adapter, childLayoutManager)
                 }
                 if (position > 3) {
-                    val adapter = SearchContentAdapter(Random.nextInt(17, 29))
+                    val adapter = SearchContentAdapter(Random.nextInt(17, 47))
 
                     val childLayoutManager = GridLayoutManager(
                         holder.binding.recyclerParentSearchRecycler.context,
-                    2,
+                        2,
                         RecyclerView.VERTICAL,
                         false)
                     holder.onBind(adapter, childLayoutManager)
@@ -107,7 +107,7 @@ class SearchAdapter(
     }
 
     override fun getItemCount(): Int {
-        return count
+        return itemType.size
     }
 
     /*
@@ -166,9 +166,7 @@ class SearchRecyclerVH(
         itemDecoration: EqualSpacingItemDecoration)
     : BaseSearchVH(binding.root) {
 
-    init {
-        binding.recyclerParentSearchRecycler.addItemDecoration(itemDecoration)
-    }
+    init { binding.recyclerParentSearchRecycler.addItemDecoration(itemDecoration) }
 
     fun onBind(
         mAdapter: SearchContentAdapter,

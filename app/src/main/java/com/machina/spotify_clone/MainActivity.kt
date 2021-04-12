@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.libraryFragment -> { navController.navigate(item.itemId, null, option) }
             }
             true
-        }
+            }
 
         binding.activityMainBtmNav.setOnNavigationItemReselectedListener { item ->
             return@setOnNavigationItemReselectedListener

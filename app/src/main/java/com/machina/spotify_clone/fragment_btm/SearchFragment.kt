@@ -35,7 +35,7 @@ class SearchFragment
             layoutManager = mLayoutManager
             addItemDecoration(mStickyHeader)
         }
-
+        Log.d("search", "returned search fragment view")
         return binding.root
     }
 

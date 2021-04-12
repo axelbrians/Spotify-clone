@@ -24,11 +24,11 @@ class HomeFragment : Fragment(), PlaylistClickListener, ArtistClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val mAdapter = HomeParentAdapter(this, this)
         val mLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.fragmentHomeRecyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = HomeParentAdapter(this@HomeFragment,
-                    this@HomeFragment)
+            adapter = mAdapter
         }
 
 

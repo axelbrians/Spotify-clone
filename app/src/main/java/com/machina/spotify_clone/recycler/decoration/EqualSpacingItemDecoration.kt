@@ -1,7 +1,6 @@
 package com.machina.spotify_clone.recycler.decoration
 
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
