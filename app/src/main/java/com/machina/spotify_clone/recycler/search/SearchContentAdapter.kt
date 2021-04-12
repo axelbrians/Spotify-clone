@@ -21,7 +21,6 @@ class SearchContentAdapter(private val size: Int): RecyclerView.Adapter<SearchCo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchContentVH {
-        Log.d("search", "content holder created")
         val binding = VhSearchContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchContentVH(binding)
     }
